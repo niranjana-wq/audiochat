@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Voice Assistant</h1>
+        <button id="start-btn">Start Listening</button>
+        <div id="response"></div>
+    </div>
+
+    <script>
+        // JavaScript to handle button click and interact with the backend
+        document.getElementById('start-btn').addEventListener('click', async () => {
+            const responseDiv = document.getElementById('response');
+            responseDiv.innerHTML = "Listening...";
+
+            // Send a POST request to the Flask backend
+            try {
+                const response = await fetch('/process_voice', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                const data = await response.json();
+                responseDiv.innerHTML = `<strong>Response:</strong> ${data.response}`;
+            } catch (error) {
+                responseDiv.innerHTML = "Error processing your request. Please try again.";
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>

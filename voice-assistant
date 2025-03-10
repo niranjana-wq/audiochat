@@ -1,0 +1,8 @@
+voice-assistant/
+│
+├── app.py                # Backend (Flask)
+├── static/               # Static files (CSS, JS)
+│   └── styles.css        # CSS file
+├── templates/            # HTML templates
+│   └── index.html        # Front-end HTML
+└── requirements.txt      # Python dependencies
